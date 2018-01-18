@@ -1,8 +1,9 @@
 import React from 'react';
+import {connect} from 'react-redux';
 
 import './feedback.css';
 
-export default function Feedback(props) {
+export function Feedback(props) {
   /** 
    * Below, we'll use the guessCount to generate a key so that React treats the feedback message 
    * as a DOM change, even when a guess does not change the feedback text.
@@ -26,3 +27,13 @@ export default function Feedback(props) {
     </h2>
   );
 }
+
+//define locale variables and map then to the state variables
+//we do not need to initialize defaults props variable here. 
+const mapStateToProps = state =>({
+  feedback: 'hot',
+  guessCount: 1
+  
+}); 
+
+export default connect(mapStateToProps)(Feedback);
