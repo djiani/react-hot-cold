@@ -1,14 +1,14 @@
 import * as actions from './actions';
 
-const initialState = { 
-  
+const initialState = {  
   feedback: 'Make your guess!',
   auralStatus: '',
   correctAnswer: Math.round(Math.random() * 100) + 1,
   guesses: []
 }
 
-export const hotColdReducer = (state=initialState, action)=> {
+export const hotColdReducer = (state=initialState, action) => {
+  
   if (action.type === actions.RESTARTGAME){
     return Object.assign({}, state, {
       guesses: [],
@@ -18,13 +18,14 @@ export const hotColdReducer = (state=initialState, action)=> {
     })
   }
   else if(action.type === actions.MAKEGUESS){
-    let guess = parseInt(action.action, 10);
+    let guess = parseInt(action.guess, 10);
     let feedback = '';
+
     if(isNaN(guess)){
       feedback = 'Please enter a valid number';
     }
     else{
-      let difference = Math.abs(guess - this.state.correctAnswer);
+      let difference = Math.abs(guess - state.correctAnswer);
       if(difference > 50){
         feedback = 'You\'re Ice Cold...';
       } else if (difference >= 30) {
@@ -39,7 +40,7 @@ export const hotColdReducer = (state=initialState, action)=> {
     }
     return Object.assign({}, state, {
       feedback,
-      guesses: [...state.guess, guess]});
+      guesses: [...state.guesses, guess]});
     
   }
   else if(action.type === actions.GENERATEAURALUPDATE){
@@ -59,5 +60,7 @@ export const hotColdReducer = (state=initialState, action)=> {
       auralStatus
     })
   }
+
+  return state;
 }
 

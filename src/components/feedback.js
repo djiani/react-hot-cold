@@ -31,9 +31,8 @@ export function Feedback(props) {
 //define locale variables and map then to the state variables
 //we do not need to initialize defaults props variable here. 
 const mapStateToProps = state =>({
-  feedback: 'hot',
-  guessCount: 1
-  
+  feedback: state.feedback,
+  guessCount: state.guesses.length 
 }); 
 
 export default connect(mapStateToProps)(Feedback);
